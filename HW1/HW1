@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/time.h>
+
+long millisecond()
+{
+  struct timevar tv;
+  gettimeofday(&tv, NULL);
+  return(1000*tv.tv_sec + tv.tv_usec/1000);
+}
+
+double f(double x) {
+  return x / (x * x + 2) * (x * x + 2) * (x * x + 2);
+}
+
+main(int argc, char *argv[])
+{
+  long start, stop;
+  start = millisecond();
+  long N; //user argument input N
+  int i; //for loop
+  double a = 0.0, b = 2.0, sum = 0.0, dx, x; //range of x 0.0 to 2.0 (a,b)
+  
+  if (argc != 2) { //is there 1 arguments?
+    printf("argument error\n");
+    exit(1);
+  }
+  N = atoi(argv[1]);
+  dx = (b-a)/N;
+
+  x = a;
+  for (i = 0; i < N; i++){
+    sum += 0.5 * (f(x) + f(x + dx)) * dx;
+    x += dx;
+  }
+  stop = millisecond();
+  printf("result :: %lf\n",sum);
+  printf("elapsed time: %ld milliseconds\n",stop-start);
+  exit(0);
+}
