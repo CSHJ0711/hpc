@@ -1,4 +1,4 @@
-hw1 9 - GFLOPS error
+hw1 9 - GFLOPS error  
 hw2 10 - good
 hw3 10
 hw4 10
